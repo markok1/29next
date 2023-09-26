@@ -123,47 +123,80 @@ const createOrder = async () => {
   btnCC.textContent = btnCC.dataset.loadingText;
   validErrBlock.innerHTML = ``;
 
-  const orderData = {
-    user: {
-      first_name: data.first_name,
-      last_name: data.last_name,
-      email: data.email,
-    },
-    lines: lineArr,
+  let orderData = {};
+  if (!checkbox.checked) {
+    orderData = {
+      user: {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+      },
+      lines: lineArr,
 
-    use_default_shipping_address: false,
+      use_default_billing_address: false,
+      billing_same_as_shipping_address: false,
 
-    use_default_billing_address: false,
-    billing_same_as_shipping_address: false,
-    billing_address: {
-      first_name: data.first_name_billing,
-      last_name: data.last_name_billing,
-      line1: data.shipping_address_line1_billing,
-      line4: data.shipping_address_line4_billing,
-      state: data.shipping_state_billing,
-      postcode: data.shipping_postcode_billing,
-      phone_number: data.phone_number,
-      country: data.shipping_country_billing,
-    },
-    payment_detail: {
-      payment_method: data.payment_method,
-      card_token: data.card_token,
-    },
-    shipping_address: {
-      first_name: data.first_name,
-      last_name: data.last_name,
-      line1: data.shipping_address_line1,
-      line4: data.shipping_address_line4,
-      state: data.shipping_state,
-      postcode: data.shipping_postcode,
-      phone_number: data.phone_number,
-      country: data.shipping_country,
-    },
-    shipping_method: data.shipping_method,
-    success_url: campaign.nextStep(nextURL),
-  };
+      billing_address: {
+        first_name: data.first_name_billing,
+        last_name: data.last_name_billing,
+        line1: data.shipping_address_line1_billing,
+        line4: data.shipping_address_line4_billing,
+        state: data.shipping_state_billing,
+        postcode: data.shipping_postcode_billing,
+        phone_number: data.phone_number,
+        country: data.shipping_country_billing,
+      },
+      payment_detail: {
+        payment_method: data.payment_method,
+        card_token: data.card_token,
+      },
+      use_default_shipping_address: false,
+      shipping_address: {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        line1: data.shipping_address_line1,
+        line4: data.shipping_address_line4,
+        state: data.shipping_state,
+        postcode: data.shipping_postcode,
+        phone_number: data.phone_number,
+        country: data.shipping_country,
+      },
+      shipping_method: data.shipping_method,
+      success_url: campaign.nextStep(nextURL),
+    };
+    console.log(orderData);
+  } else {
+    orderData = {
+      user: {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+      },
+      lines: lineArr,
 
-  console.log(orderData);
+      use_default_shipping_address: false,
+
+      use_default_billing_address: false,
+      billing_same_as_shipping_address: data.billing_same_as_shipping_address,
+      payment_detail: {
+        payment_method: data.payment_method,
+        card_token: data.card_token,
+      },
+      shipping_address: {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        line1: data.shipping_address_line1,
+        line4: data.shipping_address_line4,
+        state: data.shipping_state,
+        postcode: data.shipping_postcode,
+        phone_number: data.phone_number,
+        country: data.shipping_country,
+      },
+      shipping_method: data.shipping_method,
+      success_url: campaign.nextStep(nextURL),
+    };
+    console.log(orderData);
+  }
 
   try {
     const response = await fetch(ordersURL, {
