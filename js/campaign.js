@@ -51,3 +51,15 @@ let campaign = (function () {
 
   return { nextStep, skipSteps, once, currency };
 })();
+
+// JS for billing
+
+const checkbox = document.getElementById("sameAddressCheckbox");
+const billingShowDivs = document.querySelectorAll(".billing-show");
+
+checkbox.addEventListener("change", function () {
+  const displayValue = checkbox.checked ? "none" : "block";
+  billingShowDivs.forEach(function (div) {
+    div.style.display = displayValue;
+  });
+});
