@@ -4,130 +4,130 @@
 const validate = new JustValidate(formEl, {
   errorFieldCssClass: ["is-invalid"],
 });
+checkbox.addEventListener("change", function () {
+  if (!checkbox.checked) {
+    validate
 
-if (!checkbox.checked) {
-  validate
+      .addField(
+        "#id_first_name_billing",
+        [
+          {
+            rule: "required",
+            errorMessage: "First name is required",
+          },
 
-    .addField(
-      "#id_first_name_billing",
-      [
-        {
-          rule: "required",
-          errorMessage: "First name is required",
-        },
-
-        {
-          rule: "maxLength",
-          value: 255,
-        },
-        {
-          rule: "customRegexp",
-          value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+$/gi,
-          errorMessage: "Contains an invalid character",
-        },
-      ],
-
-      {
-        errorsContainer: ".invalid-fname",
-      }
-    )
-    .addField(
-      "#id_last_name_billing",
-      [
-        {
-          rule: "required",
-          errorMessage: "Last name is required",
-        },
+          {
+            rule: "maxLength",
+            value: 255,
+          },
+          {
+            rule: "customRegexp",
+            value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+$/gi,
+            errorMessage: "Contains an invalid character",
+          },
+        ],
 
         {
-          rule: "maxLength",
-          value: 255,
-        },
-        {
-          rule: "customRegexp",
-          value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+$/gi,
-          errorMessage: "Contains an invalid character",
-        },
-      ],
+          errorsContainer: ".invalid-fname_b",
+        }
+      )
+      .addField(
+        "#id_last_name_billing",
+        [
+          {
+            rule: "required",
+            errorMessage: "Last name is required",
+          },
 
-      {
-        errorsContainer: ".invalid-lname",
-      }
-    )
-    .addField(
-      "#id_shipping_address_line1_billing",
-      [
-        {
-          rule: "required",
-          errorMessage: "Shipping address is required",
-        },
-        {
-          rule: "maxLength",
-          value: 255,
-        },
-      ],
-      {
-        errorsContainer: ".invalid-shipping_address_line1",
-      }
-    )
-    .addField(
-      "#id_shipping_address_line4_billing",
-      [
-        {
-          rule: "required",
-          errorMessage: "Shipping city is required",
-        },
-        {
-          rule: "maxLength",
-          value: 255,
-        },
-      ],
-      {
-        errorsContainer: ".invalid-shipping_address_line4",
-      }
-    )
-    .addField(
-      "#id_shipping_state_billing",
-      [
-        {
-          rule: "required",
-          errorMessage: "Shipping state/province is required",
-        },
-      ],
-      {
-        errorsContainer: ".invalid-shipping_state",
-      }
-    )
-    .addField(
-      "#id_shipping_postcode_billing",
-      [
-        {
-          rule: "required",
-          errorMessage: "Shipping ZIP/Postcode is required",
-        },
-        {
-          rule: "maxLength",
-          value: 64,
-        },
-      ],
-      {
-        errorsContainer: ".invalid-shipping_postcode",
-      }
-    )
-    .addField(
-      "#id_shipping_country_billing",
-      [
-        {
-          rule: "required",
-          errorMessage: "Shipping country is required",
-        },
-      ],
-      {
-        errorsContainer: ".invalid-shipping_country",
-      }
-    );
-}
+          {
+            rule: "maxLength",
+            value: 255,
+          },
+          {
+            rule: "customRegexp",
+            value: /\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+$/gi,
+            errorMessage: "Contains an invalid character",
+          },
+        ],
 
+        {
+          errorsContainer: ".invalid-lname_b",
+        }
+      )
+      .addField(
+        "#id_shipping_address_line1_billing",
+        [
+          {
+            rule: "required",
+            errorMessage: "Shipping address is required",
+          },
+          {
+            rule: "maxLength",
+            value: 255,
+          },
+        ],
+        {
+          errorsContainer: ".invalid-shipping_address_line1_b",
+        }
+      )
+      .addField(
+        "#id_shipping_address_line4_billing",
+        [
+          {
+            rule: "required",
+            errorMessage: "Shipping city is required",
+          },
+          {
+            rule: "maxLength",
+            value: 255,
+          },
+        ],
+        {
+          errorsContainer: ".invalid-shipping_address_line4_b",
+        }
+      )
+      .addField(
+        "#id_shipping_state_billing",
+        [
+          {
+            rule: "required",
+            errorMessage: "Shipping state/province is required",
+          },
+        ],
+        {
+          errorsContainer: ".invalid-shipping_state_b",
+        }
+      )
+      .addField(
+        "#id_shipping_postcode_billing",
+        [
+          {
+            rule: "required",
+            errorMessage: "Shipping ZIP/Postcode is required",
+          },
+          {
+            rule: "maxLength",
+            value: 64,
+          },
+        ],
+        {
+          errorsContainer: ".invalid-shipping_postcode_b",
+        }
+      )
+      .addField(
+        "#id_shipping_country_billing",
+        [
+          {
+            rule: "required",
+            errorMessage: "Shipping country is required",
+          },
+        ],
+        {
+          errorsContainer: ".invalid-shipping_country_b",
+        }
+      );
+  }
+});
 validate
 
   .addField(
