@@ -126,6 +126,15 @@ checkbox.addEventListener("change", function () {
           errorsContainer: ".invalid-shipping_country_b",
         }
       );
+  } else {
+    validate
+      .removeField("#id_first_name_billing")
+      .removeField("#id_last_name_billing")
+      .removeField("#id_shipping_address_line1_billing")
+      .removeField("#id_shipping_address_line4_billing")
+      .removeField("#id_shipping_state_billing")
+      .removeField("#id_shipping_postcode_billing")
+      .removeField("#id_shipping_country_billing");
   }
 });
 validate
