@@ -88,12 +88,31 @@
                     <li>Lorem Ipsum is simply dummy text</li>
                   </ul>
                   <div
+                    class="quantity-picker d-flex justify-content-center align-items-center gap-3 mb-3"
+                  >
+                    <div class="fs-5">Select Quantity:</div>
+                    <div class="quantity d-flex overflow-hidden rounded-1">
+                      <button class="minus" aria-label="Decrease">
+                        &minus;
+                      </button>
+                      <input
+                        type="number"
+                        class="input-box"
+                        value="1"
+                        min="1"
+                        max="5"
+                      />
+                      <button class="plus" aria-label="Increase">&plus;</button>
+                    </div>
+                  </div>
+
+                  <div
                     class="up-prcBox d-flex justify-content-center align-items-center"
                   >
                     <div class="prc-bx ret-prc p-3 border-end">
                       <div class="fs-7">Retail Price</div>
                       <span class="originalPrice fs-1 fw-bold text-muted"
-                        >$60.00</span
+                        >$20.00</span
                       >
                     </div>
                     <div class="prc-bx ofr-prc p-3">
@@ -101,7 +120,7 @@
                       <span
                         style="color: #000"
                         class="currentPrice fs-1 fw-bold"
-                        >$30.00</span
+                        >$10.00</span
                       >
                     </div>
                   </div>
@@ -131,7 +150,7 @@
                 class="col-lg-6 d-none border-start d-lg-flex justify-content-lg-center align-items-lg-center"
               >
                 <div class="text-center">
-                  <img src="img/up1.png" class="img-fluid" />
+                  <img src="img/up2.jpg" class="img-fluid" />
                 </div>
               </div>
             </div>
@@ -169,12 +188,58 @@
     const publicKey = "O9wyWzTwgqX0YlY7AGgeAe2IYfxt7RBqgUJKaoE3";
     const nextURL = "/thank-you.html";
     const refId = sessionStorage.getItem("ref_id");
-    const upsellLineItem = [
-      {
-        package_id: 5,
-        quantity: 1,
-      },
-    ];
+    let upsellLineItem = [{}];
+
+    // quanitity picker
+    const quantityContainer = document.querySelector(".quantity");
+    const minusBtn = quantityContainer.querySelector(".minus");
+    const plusBtn = quantityContainer.querySelector(".plus");
+    const inputBox = quantityContainer.querySelector(".input-box");
+    let value = parseInt(inputBox.value);
+    (function () {
+      updateButtonStates();
+
+      quantityContainer.addEventListener("click", handleButtonClick);
+      inputBox.addEventListener("input", handleQuantityChange);
+
+      function updateButtonStates() {
+        minusBtn.disabled = value <= 1;
+        plusBtn.disabled = value >= parseInt(inputBox.max);
+      }
+
+      function handleButtonClick(event) {
+        if (event.target.classList.contains("minus")) {
+          decreaseValue();
+        } else if (event.target.classList.contains("plus")) {
+          increaseValue();
+        }
+      }
+
+      function decreaseValue() {
+        value = isNaN(value) ? 1 : Math.max(value - 1, 1);
+        inputBox.value = value;
+        updateButtonStates();
+        handleQuantityChange();
+      }
+
+      function increaseValue() {
+        value = isNaN(value) ? 1 : Math.min(value + 1, parseInt(inputBox.max));
+        inputBox.value = value;
+        updateButtonStates();
+        handleQuantityChange();
+      }
+
+      function handleQuantityChange() {
+        value = isNaN(value) ? 1 : value;
+
+        upsellLineItem = [
+          {
+            package_id: 5,
+            quantity: value,
+          },
+        ];
+      }
+    })();
   </script>
   <script type="text/javascript" src="js/campaign.js"></script>
   <script type="text/javascript" src="js/upsell.js"></script>
