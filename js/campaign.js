@@ -56,10 +56,11 @@ let campaign = (function () {
 
 const checkbox = document.getElementById("sameAddressCheckbox");
 const billingShowDivs = document.querySelectorAll(".billing-show");
-
-checkbox.addEventListener("change", function () {
-  const displayValue = checkbox.checked ? "none" : "block";
-  billingShowDivs.forEach(function (div) {
-    div.style.display = displayValue;
+if (checkbox) {
+  checkbox.addEventListener("change", function () {
+    const displayValue = checkbox.checked ? "none" : "block";
+    billingShowDivs.forEach(function (div) {
+      div.style.display = displayValue;
+    });
   });
-});
+}
