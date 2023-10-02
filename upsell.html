@@ -79,7 +79,7 @@
                     ><br />simply random text
                   </div>
                   <div class="d-lg-none text-center">
-                    <img src="img/up1.png" class="img-fluid" />
+                    <img src="img/up2.jpg" class="img-fluid" />
                   </div>
                   <ul class="up-list my-3">
                     <li>The standard chunk of Lorem Ipsum</li>
@@ -195,6 +195,19 @@
     const minusBtn = quantityContainer.querySelector(".minus");
     const plusBtn = quantityContainer.querySelector(".plus");
     const inputBox = quantityContainer.querySelector(".input-box");
+    //updating total price start
+    const currentPriceElement = document.querySelector(".currentPrice");
+    const originalPriceElement = document.querySelector(".originalPrice");
+    const priceText = currentPriceElement.textContent;
+    const originalPriceText = originalPriceElement.textContent;
+
+    const match1 = priceText.match(/\d+\.\d+/);
+    const match2 = originalPriceText.match(/\d+\.\d+/);
+
+    const price1 = parseFloat(match1[0]);
+    const price2 = parseFloat(match2[0]);
+    //updating total price end
+
     let value = parseInt(inputBox.value);
     (function () {
       updateButtonStates();
@@ -238,6 +251,26 @@
             quantity: value,
           },
         ];
+        //updating total price start
+        if (currentPriceElement && originalPriceElement) {
+          if (match1 && match2) {
+            const resultDiscount = price1 * value;
+            const fullPrice = price2 * value;
+
+            const formattedResult1 = `$${resultDiscount.toFixed(2)}`;
+            const formattedResult2 = `$${fullPrice.toFixed(2)}`;
+
+            currentPriceElement.textContent = formattedResult1;
+            originalPriceElement.textContent = formattedResult2;
+          } else {
+            console.log("No valid price found in the span element.");
+          }
+        } else {
+          console.log(
+            'No element with class "currentPrice" and "originalPrice" found.'
+          );
+        }
+        //updating total price end
       }
     })();
   </script>
