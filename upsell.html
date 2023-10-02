@@ -188,7 +188,12 @@
     const publicKey = "O9wyWzTwgqX0YlY7AGgeAe2IYfxt7RBqgUJKaoE3";
     const nextURL = "/thank-you.html";
     const refId = sessionStorage.getItem("ref_id");
-    let upsellLineItem = [{}];
+    let upsellLineItem = [
+      {
+        package_id: 5,
+        quantity: 1,
+      },
+    ];
 
     // quanitity picker
     const quantityContainer = document.querySelector(".quantity");
